@@ -7,11 +7,11 @@ output:
 
 
 ## Loading and preprocessing the data
-
+```{r}
 data <- read.csv("activity.csv", header = TRUE, sep = ",", na.strings = "NA")
 data$date <- as.Date(data$date, format = "%Y-%m-%d")
 data$interval <- factor(data$interval)
-
+```
 ## What is mean total number of steps taken per day?
 
 NA_index <- is.na(as.character(data$steps))
