@@ -13,7 +13,7 @@ data$date <- as.Date(data$date, format = "%Y-%m-%d")
 data$interval <- factor(data$interval)
 ```
 ## What is mean total number of steps taken per day?
-
+```{r}
 NA_index <- is.na(as.character(data$steps))
 data_no_NA <- data[!NA_index,]
 head(data_no_NA)
@@ -30,10 +30,11 @@ mean(steps_each_day$steps)
 
 #Median
 median(steps_each_day$steps)
-
+```
 
 ## What is the average daily activity pattern?
 
+```{r}
 #Calculating the average
 steps_per_interval <- aggregate(data_no_NA$steps, by=list(interval=data_no_NA$interval), FUN=mean)
 
@@ -51,9 +52,11 @@ max_steps
 #The 5-minute interval that contains the maximum number of steps
 intervale_max_steps<-steps_per_interval[which.max(steps_per_interval$average_steps),]$interval
 intervale_max_steps
+```
 
-## Imputing missing values
+## Inputing missing values
 
+```{r}
 sum(is.na(as.character(data$steps)))
 sum(is.na(as.character(data$date)))
 sum(is.na(as.character(data$interval)))
@@ -73,9 +76,11 @@ colnames(steps_each_day_complete) <- c("date", "steps")
 
 #Making the histogram
 hist(as.numeric(steps_each_day_complete$steps), breaks = 20, col = "red", xlab = "Number of Steps", main= "Histogram of the total number of steps taken each day")
+```
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
+```{r}
 #Creating a factor variable "day "to store the day of the week:
 complete_data$day <- as.factor(weekdays(complete_data$date))
 
@@ -107,3 +112,4 @@ week_data$day <- as.factor(week_data$day)
 #Making the plot
 library(lattice)
 xyplot(average_steps ~  interval | day, data = week_data, layout = c(1,2), type ="l", ylab="Number of Steps")
+```
